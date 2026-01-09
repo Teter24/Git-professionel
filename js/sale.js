@@ -1,3 +1,4 @@
+// ===== Données produits Soldes =====
 const produits = [
   {
     id: 1,
