@@ -5,7 +5,7 @@ const produits = [
     categorie: "Homme",
     ancienPrix: 150,
     nouveauPrix: 99,
-    image: "../assets/img/air-max.jpg" // <-- ajoute ton image ici
+    image: "../assets/img/airmax.jpg",
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ const produits = [
     categorie: "Femme",
     ancienPrix: 120,
     nouveauPrix: 79,
-    image: "../assets/img/dunk-low.jpg" // <-- ajoute ton image ici
+    image: "../assets/img/NIKE+DUNK+LOW+RETRO.jpg",
   },
   {
     id: 3,
@@ -21,15 +21,15 @@ const produits = [
     categorie: "Homme",
     ancienPrix: 140,
     nouveauPrix: 89,
-    image: "../assets/img/pegasus.jpg" // <-- ajoute ton image ici
+    image: "../assets/img/PEGASUS+EASYON.png",
   },
   {
     id: 4,
-    nom: "Nike Revolution",
+    nom: "Kobe Bryant AD",
     categorie: "Enfant",
     ancienPrix: 70,
     nouveauPrix: 49,
-    image: "../assets/img/revolution.jpg" // <-- ajoute ton image ici
+    image: "../assets/img/kobe-ad.jpg",
   },
 ];
 
@@ -53,7 +53,6 @@ function afficherProduits(liste) {
 
       return `
         <article class="produit">
-          <!-- IMAGE (tu mets les fichiers dans assets/img) -->
           <img class="produit-image" src="${p.image}" alt="${p.nom}" />
 
           <h2>${p.nom}</h2>
@@ -73,13 +72,12 @@ function appliquerFiltres() {
   const categorieChoisie = selectCategorie ? selectCategorie.value : "Toutes";
   const triChoisi = selectTri ? selectTri.value : "croissant";
 
-  // Filtrer
   let resultat = [...produits];
+
   if (categorieChoisie !== "Toutes") {
     resultat = resultat.filter((p) => p.categorie === categorieChoisie);
   }
 
-  // Trier
   resultat.sort((a, b) => {
     if (triChoisi === "croissant") return a.nouveauPrix - b.nouveauPrix;
     return b.nouveauPrix - a.nouveauPrix;
