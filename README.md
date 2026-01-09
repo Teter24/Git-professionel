@@ -7,4 +7,5 @@
 ## Workflow (TP)
 - main: stable (aucun commit direct)
 - develop: dev
-- feature/<issue>-desc: dev par issue (min 2 commits/issue)
+- feature/<issue>-desc: dev par issue
+- 

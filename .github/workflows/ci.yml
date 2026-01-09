@@ -1,0 +1,68 @@
+name: Intégration Continue
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [develop, main]
+
+jobs:
+  verification:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupération du dépôt
+        uses: actions/checkout@v4
+
+      # Vérification de la structure du projet
+      - name: Vérification de la structure
+        run: |
+          echo "🔍 Vérification des fichiers essentiels..."
+          test -f README.md && echo "✓ README.md trouvé"
+          test -f pages/index.html && echo "✓ pages/index.html trouvé"
+          test -f pages/sale.html && echo "✓ pages/sale.html trouvé"
+          test -f pages/children.html && echo "✓ pages/children.html trouvé"
+          test -f js/main.js && echo "✓ js/main.js trouvé"
+          test -f js/sale.js && echo "✓ js/sale.js trouvé"
+          test -f js/children.js && echo "✓ js/children.js trouvé"
+          test -f css/style.css && echo "✓ css/style.css trouvé"
+          test -f css/sale.css && echo "✓ css/sale.css trouvé"
+          test -f css/children.css && echo "✓ css/children.css trouvé"
+
+      # Vérification des dossiers
+      - name: Vérification des dossiers
+        run: |
+          echo "📁 Vérification des dossiers..."
+          test -d pages && echo "✓ dossier pages/ existe"
+          test -d js && echo "✓ dossier js/ existe"
+          test -d css && echo "✓ dossier css/ existe"
+          test -d images && echo "✓ dossier images/ existe" || echo "⚠ dossier images/ manquant"
+          test -d assets/img && echo "✓ dossier assets/img/ existe" || echo "⚠ dossier assets/img/ manquant"
+
+      # Vérification des images
+      - name: Vérification des images
+        run: |
+          echo "🖼️  Vérification des images..."
+          if [ -d images ]; then
+            echo "Images dans le dossier images/:"
+            ls -1 images | head -n 5 || echo "Aucune image trouvée"
+          fi
+          if [ -d assets/img ]; then
+            echo "Images dans le dossier assets/img/:"
+            ls -1 assets/img | head -n 5 || echo "Aucune image trouvée"
+          fi
+
+      # Vérification du contenu HTML
+      - name: Vérification du contenu HTML
+        run: |
+          echo "🏗️  Vérification du contenu HTML..."
+          grep -q "logo\|Logo\|LOGO" pages/index.html && echo "✓ Logo trouvé dans index.html"
+          grep -q "header\|Header" pages/sale.html && echo "✓ Header trouvé dans sale.html"
+          grep -q "footer\|Footer" pages/children.html && echo "✓ Footer trouvé dans children.html"
+
+      # Vérification du git
+      - name: Vérification du dépôt Git
+        run: |
+          echo "📚 Vérification du dépôt Git..."
+          git log --oneline | head -n 5 || echo "⚠ Pas d'historique git"
+          git branch -a | grep -E "develop|main" || echo "⚠ Branches develop/main manquantes"
