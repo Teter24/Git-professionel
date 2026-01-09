@@ -1,1 +1,10 @@
-# Git-professionel
+# Nike clone (TP Git pro)
+
+## Pages
+- Home: pages/index.html
+- Sale: pages/sale.html
+
+## Workflow (TP)
+- main: stable (aucun commit direct)
+- develop: dev
+- feature/<issue>-desc: dev par issue (min 2 commits/issue)
